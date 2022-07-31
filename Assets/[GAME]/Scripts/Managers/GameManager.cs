@@ -1,11 +1,4 @@
-﻿#region Header
-
-// Developed by Onur ÖZEL
-// onur.ozel@triflesgames.com
-
-#endregion
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace _GAME_.Scripts.Managers
@@ -38,7 +31,7 @@ namespace _GAME_.Scripts.Managers
         private void Awake()
         {
             ActivatePanel(mainMenuPanel);
-            
+
             startButton.onClick.AddListener(StartGame);
             retryButton.onClick.AddListener(RetryGame);
             nextButton.onClick.AddListener(NextLevel);
@@ -63,14 +56,14 @@ namespace _GAME_.Scripts.Managers
             Announce(EventManager<object[]>.OnGameStart);
             ActivatePanel(gamePanel);
         }
-        
+
         private void ActivatePanel(GameObject panel)
         {
             mainMenuPanel.SetActive(false);
             gamePanel.SetActive(false);
             gameFailPanel.SetActive(false);
             gameCompletePanel.SetActive(false);
-            
+
             panel.SetActive(true);
         }
 
