@@ -10,6 +10,8 @@ namespace _GAME_.Scripts.Operators
 
         [SerializeField] private PathCreator pathCreator;
         [SerializeField] private EndOfPathInstruction endOfPathInstruction;
+        
+        [SerializeField] private Transform followTransform;
 
         #endregion
 
@@ -18,6 +20,7 @@ namespace _GAME_.Scripts.Operators
         private void Start()
         {
             Announce(EventManager<object[]>.GetPath, pathCreator, endOfPathInstruction);
+            Announce(EventManager<object[]>.GetFollowTransform, followTransform);
         }
 
         #endregion
