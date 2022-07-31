@@ -1,13 +1,4 @@
-﻿#region Header
-
-// Developed by Onur ÖZEL
-// onur.ozel@triflesgames.com
-
-#endregion
-
-using System;
-
-namespace _GAME_.Scripts
+﻿namespace _GAME_.Scripts
 {
     public class PlayerOperator : Operator
     {
@@ -30,6 +21,7 @@ namespace _GAME_.Scripts
         private void OnGameStart(object[] obj)
         {
             Announce(EventManager<object[]>.CanFollowPath, true);
+            Announce(EventManager<object[]>.CanMoveHorizontal, true);
         }
 
         #endregion

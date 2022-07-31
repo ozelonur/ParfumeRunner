@@ -11,7 +11,7 @@ namespace _GAME_.Scripts.Operators
         private EndOfPathInstruction _endOfPathInstruction;
 
         private MovementControlWithPathOperator _movementControlWithPathOperator;
-        
+
         private bool _canFollowPath;
         private float _distanceTravelled;
 
@@ -23,16 +23,15 @@ namespace _GAME_.Scripts.Operators
         {
             EventManager<object[]>.GetPath += GetPath;
             EventManager<object[]>.GetMovementControlWithPath += GetMovementControlWithPath;
+            EventManager<object[]>.CanFollowPath += CanFollowPath;
         }
 
-        private void GetMovementControlWithPath(object[] obj)
-        {
-            _movementControlWithPathOperator = (MovementControlWithPathOperator)obj[0];
-        }
 
         private void OnDisable()
         {
             EventManager<object[]>.GetPath -= GetPath;
+            EventManager<object[]>.GetMovementControlWithPath -= GetMovementControlWithPath;
+            EventManager<object[]>.CanFollowPath -= CanFollowPath;
         }
 
         private void Update()
@@ -46,7 +45,7 @@ namespace _GAME_.Scripts.Operators
             {
                 return;
             }
-            
+
             _distanceTravelled += _movementControlWithPathOperator.movementProperties.VerticalSpeed * Time.deltaTime;
             transform.position = _pathCreator.path.GetPointAtDistance(_distanceTravelled, _endOfPathInstruction);
             transform.rotation = _pathCreator.path.GetRotationAtDistance(_distanceTravelled, _endOfPathInstruction);
@@ -65,6 +64,16 @@ namespace _GAME_.Scripts.Operators
             {
                 _pathCreator.pathUpdated += OnPathChanged;
             }
+        }
+
+        private void GetMovementControlWithPath(object[] obj)
+        {
+            _movementControlWithPathOperator = (MovementControlWithPathOperator) obj[0];
+        }
+
+        private void CanFollowPath(object[] obj)
+        {
+            _canFollowPath = (bool) obj[0];
         }
 
         #endregion
