@@ -17,6 +17,7 @@ public class EventManager<T>
     public static Action<T> CanFollowPath;
     public static Action<T> CanMoveHorizontal;
     public static Action<T> GetFollowTransform;
+    public static Action<T> ChangePlayer;
 
     #endregion
 }

@@ -1,7 +1,17 @@
-﻿namespace _GAME_.Scripts
+﻿using _GAME_.Scripts.Enums;
+using _GAME_.Scripts.Managers;
+using _GAME_.Scripts.Operators;
+
+namespace _GAME_.Scripts
 {
     public class PlayerOperator : Operator
     {
+        #region Public Variables
+
+        public CharacterAnimateOperator currentAnimator;
+
+        #endregion
+
         #region MonoBehaviour Methods
 
         private void OnEnable()
@@ -14,6 +24,12 @@
             EventManager<object[]>.OnGameStart -= OnGameStart;
         }
 
+        private void Start()
+        {
+            PlayerManager.Instance.SetPlayer(this);
+            Announce(EventManager<object[]>.ChangePlayer, 5);
+        }
+
         #endregion
 
         #region Event Methods
@@ -22,6 +38,8 @@
         {
             Announce(EventManager<object[]>.CanFollowPath, true);
             Announce(EventManager<object[]>.CanMoveHorizontal, true);
+            
+            currentAnimator.PlayAnimation(AnimationType.Walk);
         }
 
         #endregion
