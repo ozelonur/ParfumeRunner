@@ -33,6 +33,8 @@ namespace _GAME_.Scripts.Managers
             _level = Resources.Load<Level>("Levels/Level" + LevelIndex);
 
             Instantiate(_level.LevelPrefab);
+            
+            Announce(EventManager<object[]>.GetLevelNumber, LevelIndex);
         }
 
         private void OnDisable()

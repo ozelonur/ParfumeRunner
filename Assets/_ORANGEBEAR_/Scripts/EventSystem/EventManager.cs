@@ -6,6 +6,7 @@ public class EventManager<T>
 
     public static Action<T> OnGameStart;
     public static Action<T> OnGameComplete;
+    public static Action<T> GetLevelNumber;
 
     #endregion
 
