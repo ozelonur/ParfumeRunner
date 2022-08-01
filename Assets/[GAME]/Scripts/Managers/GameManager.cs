@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace _GAME_.Scripts.Managers
@@ -37,18 +38,38 @@ namespace _GAME_.Scripts.Managers
             nextButton.onClick.AddListener(NextLevel);
         }
 
+        private void OnEnable()
+        {
+            EventManager<object[]>.OnGameComplete += OnGameComplete;
+        }
+
+        private void OnDisable()
+        {
+            EventManager<object[]>.OnGameComplete -= OnGameComplete;
+        }
+
+        #endregion
+
+        #region Event Methods
+
+        private void OnGameComplete(object[] obj)
+        {
+            bool status = (bool) obj[0];
+
+            ActivatePanel(status ? gameCompletePanel : gameFailPanel);
+        }
+
         #endregion
 
         #region Private Methods
 
         private void NextLevel()
         {
-            ActivatePanel(gameCompletePanel);
+            SceneManager.LoadScene("Main");
         }
 
         private void RetryGame()
         {
-            ActivatePanel(gameFailPanel);
         }
 
         private void StartGame()

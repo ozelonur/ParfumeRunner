@@ -10,6 +10,7 @@ namespace _GAME_.Scripts.Operators
         private void OnTriggerEnter(Collider other)
         {
             other.GetComponent<IGate>()?.GateHit();
+            other.GetComponent<IFinish>()?.FinishHit();
         }
 
         #endregion

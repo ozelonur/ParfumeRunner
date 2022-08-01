@@ -27,4 +27,10 @@ public class EventManager<T>
     public static Action<T> UpdatePriceUI;
 
     #endregion
+
+    #region Camera Events
+
+    public static Action<T> DetachCamera;
+
+    #endregion
 }

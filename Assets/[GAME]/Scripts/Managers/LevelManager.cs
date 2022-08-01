@@ -32,8 +32,18 @@ namespace _GAME_.Scripts.Managers
         {
             _level = Resources.Load<Level>("Levels/Level" + LevelIndex);
 
-            Instantiate(_level.LevelPrefab);
-            
+            if (_level != null)
+            {
+                Instantiate(_level.LevelPrefab);
+            }
+
+            else
+            {
+                LevelIndex = 1;
+                _level = Resources.Load<Level>("Levels/Level" + LevelIndex);
+                Instantiate(_level.LevelPrefab);
+            }
+
             Announce(EventManager<object[]>.GetLevelNumber, LevelIndex);
         }
 
@@ -48,8 +58,8 @@ namespace _GAME_.Scripts.Managers
 
         private void LevelComplete(object[] args)
         {
-            bool status = (bool)args[0];
-            
+            bool status = (bool) args[0];
+
             if (status)
             {
                 LevelIndex++;
