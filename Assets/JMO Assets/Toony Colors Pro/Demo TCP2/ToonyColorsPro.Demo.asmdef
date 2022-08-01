@@ -1,7 +1,9 @@
 {
     "name": "ToonyColorsPro2.Demo",
     "references": [
-        "ToonyColorsPro.Runtime"
+        "ToonyColorsPro.Runtime",
+        "UnityEditor.UI",
+        "UnityEngine.UI"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

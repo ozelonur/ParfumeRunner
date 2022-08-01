@@ -27,7 +27,6 @@ namespace _GAME_.Scripts
         private void Start()
         {
             PlayerManager.Instance.SetPlayer(this);
-            Announce(EventManager<object[]>.ChangePlayer, 5);
         }
 
         #endregion

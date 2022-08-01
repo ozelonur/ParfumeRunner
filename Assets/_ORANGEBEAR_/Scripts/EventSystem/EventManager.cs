@@ -20,4 +20,11 @@ public class EventManager<T>
     public static Action<T> ChangePlayer;
 
     #endregion
+
+    #region Price Events
+
+    public static Action<T> GateInteracted;
+    public static Action<T> UpdatePriceUI;
+
+    #endregion
 }
