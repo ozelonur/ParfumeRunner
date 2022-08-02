@@ -8,7 +8,6 @@ namespace _GAME_.Scripts.Operators
         #region SerializeFields
 
         [SerializeField] private TMP_Text levelText;
-        [SerializeField] private TMP_Text priceText;
 
         #endregion
 
@@ -17,13 +16,11 @@ namespace _GAME_.Scripts.Operators
         private void OnEnable()
         {
             EventManager<object[]>.GetLevelNumber += GetLevelNumber;
-            EventManager<object[]>.UpdatePriceUI += UpdatePriceUI;
         }
 
         private void OnDisable()
         {
             EventManager<object[]>.GetLevelNumber -= GetLevelNumber;
-            EventManager<object[]>.UpdatePriceUI -= UpdatePriceUI;
         }
 
         #endregion
@@ -33,11 +30,6 @@ namespace _GAME_.Scripts.Operators
         private void GetLevelNumber(object[] obj)
         {
             levelText.text = "Level " + obj[0];
-        }
-        
-        private void UpdatePriceUI(object[] obj)
-        {
-            priceText.text = "$" + obj[0];
         }
 
         #endregion

@@ -18,7 +18,7 @@ namespace _GAME_.Scripts.Operators
 
         #endregion
 
-        #region MonoBehaviour Methods
+        #region Event Methods
 
         private void OnEnable()
         {
@@ -49,6 +49,8 @@ namespace _GAME_.Scripts.Operators
             {
                 PlayerManager.Instance.currentPlayer.currentAnimator.PlayAnimation(AnimationType.Walk);
             }
+            
+            Announce(EventManager<object[]>.UpdatePriceTagPosition);
 
             _currentIndex = index;
         }

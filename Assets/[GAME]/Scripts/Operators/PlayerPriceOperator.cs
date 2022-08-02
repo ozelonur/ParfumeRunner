@@ -1,4 +1,5 @@
 ﻿using _GAME_.Scripts.Enums;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _GAME_.Scripts.Operators
@@ -15,8 +16,11 @@ namespace _GAME_.Scripts.Operators
 
         private void Start()
         {
-            Announce(EventManager<object[]>.ChangePlayer, _price);
-            Announce(EventManager<object[]>.UpdatePriceUI, _price);
+            DOVirtual.DelayedCall(.01f, () =>
+            {
+                Announce(EventManager<object[]>.ChangePlayer, _price);
+                Announce(EventManager<object[]>.UpdatePriceUI, _price);
+            });
         }
 
         private void OnEnable()

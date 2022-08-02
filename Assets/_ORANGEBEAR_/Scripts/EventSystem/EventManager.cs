@@ -33,4 +33,10 @@ public class EventManager<T>
     public static Action<T> DetachCamera;
 
     #endregion
+
+    #region Canvas Events
+
+    public static Action<T> UpdatePriceTagPosition;
+
+    #endregion
 }

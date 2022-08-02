@@ -6,6 +6,13 @@ namespace _GAME_.Scripts.Operators
 {
     public class CharacterAnimateOperator : Operator, IAnimator
     {
+        #region Public Variables
+
+        public Transform priceTagTransform;
+        public Vector3 priceTagPosition;
+
+        #endregion
+        
         #region Private Fields
 
         private Animator _animator;
