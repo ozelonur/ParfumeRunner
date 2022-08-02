@@ -10,12 +10,7 @@ namespace _GAME_.Scripts.Operators
 
         public Transform priceTagTransform;
         public Vector3 priceTagPosition;
-
-        #endregion
-        
-        #region Private Fields
-
-        private Animator _animator;
+        public Animator animator;
 
         #endregion
 
@@ -23,7 +18,7 @@ namespace _GAME_.Scripts.Operators
 
         private void Awake()
         {
-            _animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>();
         }
 
         #endregion
@@ -32,7 +27,7 @@ namespace _GAME_.Scripts.Operators
 
         public void PlayAnimation(AnimationType animationType)
         {
-            ((IAnimator) this).SetAnimation(_animator, animationType);
+            ((IAnimator) this).SetAnimation(animator, animationType);
         }
 
         #endregion

@@ -1319,6 +1319,7 @@ GameObject:
   - component: {fileID: 671364802}
   - component: {fileID: 671364804}
   - component: {fileID: 671364805}
+  - component: {fileID: 671364806}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1385,6 +1386,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPlayer: {fileID: 0}
+--- !u!114 &671364806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671364801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357e35edd4304e9b9b27636896eaa10d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stickmanPrefab: {fileID: 7109367435641210958, guid: da94028ea8a2cd041a66fc8b16ae5891,
+    type: 3}
+  finishStickman: {fileID: 0}
+  stickmanMaterials:
+  - {fileID: 2100000, guid: e67c8a9c1706b7f4d87f40443d283c35, type: 2}
+  - {fileID: 2100000, guid: ee5968452f5e7404b8340a46fa1425d8, type: 2}
+  - {fileID: 2100000, guid: 0c17dab13ec23c74b9084325a86e4b42, type: 2}
+  - {fileID: 2100000, guid: 206f056a582293c478920ea006853051, type: 2}
+  - {fileID: 2100000, guid: fdeedc212507a8148a8d0df864e9af1c, type: 2}
+  - {fileID: 2100000, guid: 20230857555902546a58efc08713feb7, type: 2}
+  - {fileID: 2100000, guid: a19c2035e4308bf4597dccd2710f71e4, type: 2}
+  - {fileID: 2100000, guid: a9cedc368b28b2c44b8511be826ce8b9, type: 2}
 --- !u!1 &700884015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,7 +2009,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486496879}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 

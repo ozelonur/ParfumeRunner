@@ -1,4 +1,5 @@
 ﻿
+using _GAME_.Scripts.Managers;
 using PathCreation;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ namespace _GAME_.Scripts.Operators
         [SerializeField] private EndOfPathInstruction endOfPathInstruction;
         
         [SerializeField] private Transform followTransform;
+        
+        [SerializeField] private StickmanOperator finishStickman;
 
         #endregion
 
@@ -21,6 +24,8 @@ namespace _GAME_.Scripts.Operators
         {
             Announce(EventManager<object[]>.GetPath, pathCreator, endOfPathInstruction);
             Announce(EventManager<object[]>.GetFollowTransform, followTransform);
+            
+            StickmanManager.Instance.finishStickman = finishStickman;
         }
 
         #endregion

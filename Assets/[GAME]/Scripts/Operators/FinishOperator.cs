@@ -1,5 +1,4 @@
-﻿using _GAME_.Scripts.Enums;
-using _GAME_.Scripts.Interfaces;
+﻿using _GAME_.Scripts.Interfaces;
 using _GAME_.Scripts.Managers;
 using DG.Tweening;
 using UnityEngine;
@@ -10,7 +9,7 @@ namespace _GAME_.Scripts.Operators
     {
         #region Serialize Fields
 
-        [SerializeField] private Transform finishTransform;
+        [SerializeField] private Transform jumpTransform;
 
         #endregion
 
@@ -18,16 +17,10 @@ namespace _GAME_.Scripts.Operators
 
         private PlayerOperator _playerOperator;
         private Transform _playerTransform;
-        private Camera _camera;
 
         #endregion
 
         #region MonoBehaviour Methods
-
-        private void Awake()
-        {
-            _camera = Camera.main;
-        }
 
         private void Start()
         {
@@ -47,34 +40,31 @@ namespace _GAME_.Scripts.Operators
             Announce(EventManager<object[]>.CanFollowPath, false);
             Announce(EventManager<object[]>.CanMoveHorizontal, false);
 
-            _playerTransform.parent = finishTransform;
+            _playerTransform.parent = jumpTransform;
 
-            _playerTransform.DOLookAt(finishTransform.position, .3f)
+            _playerOperator.currentAnimator.animator.enabled = false;
+
+            _playerTransform.DOLocalRotate(Vector3.zero, .6f)
                 .SetEase(Ease.Linear)
                 .SetLink(_playerTransform.gameObject);
 
-            _playerTransform.DOLocalJump(Vector3.zero, 2, 1, .3f)
-                .OnComplete(LookAtCameraAndDance)
+            _playerTransform.DOLocalJump(Vector3.zero, 3, 1, .6f)
+                .OnComplete(AnimateBottle)
                 .SetEase(Ease.Linear)
                 .SetLink(_playerTransform.gameObject);
         }
 
-        #endregion
-
-        #region Private Variables
-
-        private void LookAtCameraAndDance()
+        private void AnimateBottle()
         {
-            _playerOperator.currentAnimator.PlayAnimation(AnimationType.Idle);
-
-            Announce(EventManager<object[]>.DetachCamera);
-
-            Vector3 lookAt = _camera.transform.position;
-            lookAt.y = _playerTransform.position.y;
-
-            _playerTransform.DOLookAt(lookAt, .3f)
-                .OnComplete(() => { Announce(EventManager<object[]>.OnGameComplete, true); })
+            _playerTransform.DOLocalMove(Vector3.down / 4, .5f)
+                .OnComplete(() =>
+                {
+                    Announce(EventManager<object[]>.SpawnStickman);
+                    _playerTransform.DOScale(Vector3.zero, .3f)
+                        .SetEase(Ease.OutBack).SetLink(_playerTransform.gameObject);
+                })
                 .SetEase(Ease.Linear)
+                .SetLoops(4, LoopType.Yoyo)
                 .SetLink(_playerTransform.gameObject);
         }
 

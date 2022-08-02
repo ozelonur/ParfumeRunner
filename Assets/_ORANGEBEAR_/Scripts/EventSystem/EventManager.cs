@@ -39,4 +39,10 @@ public class EventManager<T>
     public static Action<T> UpdatePriceTagPosition;
 
     #endregion
+
+    #region Stickman Events
+
+    public static Action<T> SpawnStickman;
+
+    #endregion
 }
