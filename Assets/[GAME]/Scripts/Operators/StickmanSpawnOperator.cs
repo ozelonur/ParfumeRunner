@@ -60,8 +60,6 @@ namespace _GAME_.Scripts.Operators
 
                 stickman.transform.position = stickmanTransform.position +
                                               new Vector3(spawnPosition.x, 0, Mathf.Abs(spawnPosition.z));
-
-                stickman.StartMoving(stickmanTransform);
             }
 
             DOVirtual.DelayedCall(7f, () => { Announce(EventManager<object[]>.OnGameComplete, true); });

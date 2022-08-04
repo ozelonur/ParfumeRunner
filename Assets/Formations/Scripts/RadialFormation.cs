@@ -1,29 +1,33 @@
-using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class RadialFormation : FormationBase {
-    [SerializeField] private int _amount = 10;
-    [SerializeField] private float _radius = 1;
-    [SerializeField] private float _radiusGrowthMultiplier = 0;
-    [SerializeField] private float _rotations = 1;
-    [SerializeField] private int _rings = 1;
-    [SerializeField] private float _ringOffset = 1;
-    [SerializeField] private float _nthOffset = 0;
+public class RadialFormation : FormationBase
+{
+    [SerializeField] private int amount = 10;
+    [SerializeField] private float radius = 1;
+    [SerializeField] private float radiusGrowthMultiplier;
+    [SerializeField] private float rotations = 1;
+    [SerializeField] private int rings = 1;
+    [SerializeField] private float ringOffset = 1;
+    [SerializeField] private float nthOffset;
 
-    public override IEnumerable<Vector3> EvaluatePoints() {
-        var amountPerRing = _amount / _rings;
-        var ringOffset = 0f;
-        for (var i = 0; i < _rings; i++) {
-            for (var j = 0; j < amountPerRing; j++) {
-                var angle = j * Mathf.PI * (2 * _rotations) / amountPerRing + (i % 2 != 0 ? _nthOffset : 0);
 
-                var radius = _radius + ringOffset + j * _radiusGrowthMultiplier;
-                var x = Mathf.Cos(angle) * radius;
-                var z = Mathf.Sin(angle) * radius;
+    public override IEnumerable<Vector3> EvaluatePoints()
+    {
+        int amountPerRing = amount / rings;
+        float ringOffsetLocal = 0f;
+        for (int i = 0; i < rings; i++)
+        {
+            for (int j = 0; j < amountPerRing; j++)
+            {
+                float angle = j * Mathf.PI * (2 * rotations) / amountPerRing + (i % 2 != 0 ? nthOffset : 0);
 
-                var pos = new Vector3(x, 0, z);
+                float radiusLocal = this.radius + ringOffsetLocal + j * radiusGrowthMultiplier;
+                float x = Mathf.Cos(angle) * radiusLocal;
+                float z = Mathf.Sin(angle) * radiusLocal;
+
+                Vector3 pos = new Vector3(x, 0, z);
 
                 pos += GetNoise(pos);
 
@@ -32,7 +36,42 @@ public class RadialFormation : FormationBase {
                 yield return pos;
             }
 
-            ringOffset += _ringOffset;
+            ringOffsetLocal += ringOffset;
         }
     }
+
+    #region Event Methods
+
+    private void OnEnable()
+    {
+        EventManager<object[]>.UpdatePriceUI += UpdatePriceUI;
+        EventManager<object[]>.SpawnStickman += SpawnStickman;
+    }
+
+    private void OnDisable()
+    {
+        EventManager<object[]>.UpdatePriceUI += UpdatePriceUI;
+        EventManager<object[]>.SpawnStickman -= SpawnStickman;
+    }
+
+    private void SpawnStickman(object[] obj)
+    {
+        DOTween.To(() => radius, x => radius = x, 5, 0.5f);
+    }
+
+    private void UpdatePriceUI(object[] obj)
+    {
+        amount = (int) obj[0];
+        amount = amount switch
+        {
+            < 100 => 3,
+            >= 100 and < 300 => 6,
+            >= 300 and < 500 => 9,
+            >= 500 and < 750 => 12,
+            >= 750 and < 1000 => 15,
+            >= 1000 => 20
+        };
+    }
+
+    #endregion
 }
